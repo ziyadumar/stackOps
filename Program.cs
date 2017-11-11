@@ -1,40 +1,40 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-namespace ConsoleApplication1
+namespace FirstConsApp
 {
     class Program
     {
         static void Main(string[] args)
         {         
-            stack st = new stack();
+            stack stac = new stack();
           while (true)
             {
                 Console.Clear();
-                Console.WriteLine("\nStack MENU(size -- 10)");
+                Console.WriteLine("\n\t*******MENU*******\n");
                 Console.WriteLine("1. Add an element");
                 Console.WriteLine("2. See the Top element.");
                 Console.WriteLine("3. Remove top element.");
                 Console.WriteLine("4. Display stack elements.");
                 Console.WriteLine("5. Exit");
-                Console.Write("Select your choice: ");
-                int choice = Convert.ToInt32(Console.ReadLine());
+                Console.Write("Enter your choice: ");
+                int choice = Convert.ToInt16(Console.ReadLine());
                 switch (choice)
                 {
                     case 1:
-                        Console.WriteLine("Enter an Element : ");
-                        st.Push(Console.ReadLine());
+                        Console.WriteLine("Enter the Element : ");
+                        stac.Push(Console.ReadLine());
                         break;
  
-                    case 2: Console.WriteLine("Top element is: {0}", st.Peek());
+                    case 2: Console.WriteLine("Topmost element is: {0}", stac.Peek());
                         break;
  
-                    case 3: Console.WriteLine("Element removed: {0}", st.Pop());
+                    case 3: Console.WriteLine("The element removed is: {0}", stac.Pop());
                         break;
  
-                    case 4: st.Display();
+                    case 4: stac.Show();
                         break;
  
                     case 5: System.Environment.Exit(1);
@@ -45,34 +45,36 @@ namespace ConsoleApplication1
         }
     }
  
-    interface StackADT
+    interface Functions
     {
         Boolean isEmpty();
         void Push(Object element);
         Object Pop();
         Object Peek();
-        void Display();
+        void Show();
     }
-    class stack : StackADT
+    class stack : Functions
     {
         private int StackSize;
-        public int StackSizeSet
+        public int FixSize
         {
-            get { return StackSize; }
-            set { StackSize = value; }
+            get 
+                { return StackSize; }
+            set 
+                { StackSize = value; }
         }
         public int top;
-        Object[] item;
+        Object[] stacc;
         public stack()
         {
-            StackSizeSet = 10;
-            item = new Object[StackSizeSet];
+            FixSize = 10;
+            stacc = new Object[FixSize];
             top = -1;
         }
         public stack(int capacity)
         {
-            StackSizeSet = capacity;
-            item = new Object[StackSizeSet];
+            FixSize = capacity;
+            stacc = new Object[FixSize];
             top = -1;
         }
         public bool isEmpty()
@@ -91,7 +93,7 @@ namespace ConsoleApplication1
             else
             {
  
-                item[++top] = element;
+                stacc[++top] = element;
                 Console.WriteLine("Item pushed successfully!");
             }
         }
@@ -105,7 +107,7 @@ namespace ConsoleApplication1
             else
             {
  
-                return item[top--];
+                return stacc[top--];
             }
         }
         public object Peek()
@@ -118,17 +120,17 @@ namespace ConsoleApplication1
             }
             else
             {
-                return item[top];
+                return stacc[top];
             }
         }
  
  
-        public void Display()
+        public void Show()
         {
             for (int i = top; i > -1; i--)
             {
  
-                Console.WriteLine("Item {0}: {1}", (i + 1), item[i]);
+                Console.WriteLine("Item {0}: {1}", (i + 1), stacc[i]);
             }
         }
     }
